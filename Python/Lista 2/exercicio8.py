@@ -8,11 +8,11 @@
 
 def calcularImposto(salario) :
     if salario <= 1500 :
-        return 0.0
+        return 0.0 # insento
     elif salario > 1500 and salario <= 2000 :
-        return 0.10
+        return 0.10 # 10%
     elif salario > 2000 :
-        return 0.15
+        return 0.15 # 15%
 
 def calcularSalarioLiquido(salario, imposto) :
     desconto = salario * imposto
@@ -21,17 +21,17 @@ def calcularSalarioLiquido(salario, imposto) :
 
 maiorSalario = 0.0
 menorSalario = 0.0
-mediaSalarial = 0.0
+somatorioSalarial = 0.0
 
-for indice in range(1, 11) : 
+for indice in range(1,11) :
     print(f'\nInforme o salário do {indice}º funcionário: ')
     salario = float(input())
 
     imposto = calcularImposto(salario)
     salarioLiquido = calcularSalarioLiquido(salario, imposto)
 
-    print(f'Imposto de renda: {imposto * 100 }%')
-    print(f'Salário líquido a receber: R$ {salarioLiquido}')
+    print(f'Imposto de renda: {imposto * 100}%')
+    print(f'Salário Liquído a receber: R$ {salarioLiquido}')
 
     if indice == 1 :
         maiorSalario = salario
@@ -39,13 +39,15 @@ for indice in range(1, 11) :
     
     if salario >= maiorSalario :
         maiorSalario = salario
-    
+
     if salario <= menorSalario :
         menorSalario = salario
 
-    mediaSalarial += salario
+    somatorioSalarial += salario
+
+mediaSalarial = somatorioSalarial / 10
 
 print("\n")
-print(f'Maior salario: R$ {maiorSalario}')
-print(f'Menor salario: R$ {menorSalario}')
-print(f'Média salarial: R$ {mediaSalarial/10}')
+print(f'Maior Salário: R$ {maiorSalario}')
+print(f'Menor Salário: R$ {menorSalario}')
+print(f'Média Salarial: R$ {mediaSalarial}')

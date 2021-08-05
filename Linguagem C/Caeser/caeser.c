@@ -3,6 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define T_ALF 26
+#define DL_MAI 90
+#define DL_MIN 122
 
 bool isNumber(char s[]) {
     bool b = false;
@@ -19,6 +22,21 @@ bool isNumber(char s[]) {
     return b;
 }
 
+char cifrar(c, k, delimitador) {
+	if((c + k) <= delimitador) {
+		return c + k;
+	}
+
+	else {
+	    if(k <= T_ALF) {
+			return c + k - T_ALF;
+		}
+
+		k = (k % T_ALF);
+        return cifrar(c, k, delimitador);
+	}
+}
+
 int main(int argc, char *argv[]) {
 
     if(argc == 1 || argc > 2) {
@@ -32,31 +50,24 @@ int main(int argc, char *argv[]) {
     }
 
     int k = atoi(argv[1]);
+    int d = k % 26;
 
     string p = get_string("plaintext: ");
     int n = strlen(p);
-    char c[n];
 
-
-    for(int i=0; i<n; i++) {
+    for(int i = 0; i < n; i++) {
         if(p[i] >= 'A' && p[i] <= 'Z') {
-            c[i] = ((p[i] + k) <= 90) ? (p[i] + k) : (p[i] + k - 26);
+            p[i] = cifrar(p[i], k, DL_MAI);
         }
 
         else if(p[i] >= 'a' && p[i] <= 'z') {
-            c[i] = ((p[i] + k) <= 122) ? (p[i] + k) : (p[i] + k - 26);
-        }
-
-        else {
-            c[i] = p[i];
+            p[i] = cifrar(p[i], k, DL_MIN);
         }
     }
 
     printf("ciphertext: ");
-    int i = 0;
-    while(c[i] != '\0') {
-        printf("%c", c[i]);
-        i++;
+    for(int i = 0; i < n; i++) {
+        printf("%c", p[i]);
     }
     printf("\n");
 
